@@ -1,0 +1,5 @@
+<project name="multi-xsol" author="" signature="" version="0.0.0.1" bundle_type="native">
+    <dependency>
+		<native_shared_library name = "xsol" lpath="./lib"/>
+    </dependency>
+</project>
