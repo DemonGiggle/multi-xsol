@@ -118,12 +118,16 @@ unsigned long time_elapsed; /* Number of seconds elapsed */
 struct stck *moved_card; /* Pointer to the currently top moved card */
 struct undo_stk *undo; /* Stack containing data for undo */
 
-int main(int argc, char **argv) {
+int xsol_main()
+{
    XtAppContext app_context;
    Widget parent, mainwindow, menubar, gamemenu;
    Display *display;
    Arg args[20];
    int n, i;
+
+   int argc = 0;
+   char** argv = NULL;
     
    for(i=1; i<argc; i++) {
       if(strcmp(argv[i], "-notimer") == 0) istimer = 0;
@@ -201,6 +205,10 @@ int main(int argc, char **argv) {
    XtManageChild(score_widget);
    XtAppMainLoop(app_context);
    return 0;
+}
+
+int main(int argc, char **argv) {
+	xsol_main();
 }
 /*****************************************************************************/
 void timerCB(XtPointer client_data, XtIntervalId *timer_id) {
