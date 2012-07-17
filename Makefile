@@ -4,13 +4,13 @@ CC=cc
 # Hopefully, in a future release I will include gnu configure
 
 # For Linux Systems with Redhat Motif 2.1
-LIBS=-lXm -lXt -lX11 -lXext -lXp
+LIBS=-lXm -lXt -lX11 -lXext -lXp -ldl -lxcb -lXau -lXdmcp -lpthread
 LIBPATH=/usr/X11R6/lib
 MOREARGS=-Wall
 
 
 # Static Link version for Linux Systems with Redhat Motif 2.1
-LIBS=-lXm -lXt -lX11 -lXext -lXp -lSM -lICE
+LIBS=-lXm -lXt -lX11 -lXext -lXp -lSM -lICE -ldl -lxcb -lXau -lXdmcp -lpthread
 LIBPATH=/usr/X11R6/lib
 MOREARGS=-static
 
