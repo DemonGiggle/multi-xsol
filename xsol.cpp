@@ -33,6 +33,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <cstdint>
 #include "xsol.h"  
 
 #define CARD_WIDTH	70   /* Width of the card */
@@ -179,18 +180,18 @@ int xsol_main()
 
 
    n = 0;
-   menubar = XmCreateMenuBar(mainwindow, "menubar", args, n);
+   menubar = XmCreateMenuBar(mainwindow, (char*)"menubar", args, n);
    XtManageChild(menubar);
-   gamemenu = CreateMenu(menubar, "Game");
-   CreateMenuItem(gamemenu, "New Game", (XtCallbackProc) newCB, (XtPointer) NULL);
-   undomenu = CreateMenuItem(gamemenu, "Undo", (XtCallbackProc) undoCB, (XtPointer) NULL);
-   CreateMenuItem(gamemenu, "Options", (XtCallbackProc) optionsCB, (XtPointer) parent);
-   CreateMenuItem(gamemenu, "About", (XtCallbackProc) aboutCB, (XtPointer) parent);
-   CreateMenuItem(gamemenu, "Exit", (XtCallbackProc) exitCB, (XtPointer) NULL);
+   gamemenu = CreateMenu(menubar, (char*)"Game");
+   CreateMenuItem(gamemenu, (char*)"New Game", (XtCallbackProc) newCB, (XtPointer) NULL);
+   undomenu = CreateMenuItem(gamemenu, (char*)"Undo", (XtCallbackProc) undoCB, (XtPointer) NULL);
+   CreateMenuItem(gamemenu, (char*)"Options", (XtCallbackProc) optionsCB, (XtPointer) parent);
+   CreateMenuItem(gamemenu, (char*)"About", (XtCallbackProc) aboutCB, (XtPointer) parent);
+   CreateMenuItem(gamemenu, (char*)"Exit", (XtCallbackProc) exitCB, (XtPointer) NULL);
 
    n = 0;
    XtSetArg(args[n], XmNalignment, XmALIGNMENT_END); n++;
-   score_widget = XmCreateLabel(mainwindow, "", args, n);
+   score_widget = XmCreateLabel(mainwindow, (char*)"", args, n);
    XtAppAddTimeOut(app_context, 1000, (XtTimerCallbackProc) timerCB, (XtPointer) app_context);
    XtManageChild(mainwindow);
    XtRealizeWidget(parent);
@@ -256,7 +257,7 @@ void aboutCB(Widget parent, XtPointer client_data, XtPointer call_data) {
    XtSetArg(args[n], XmNtitle, "About"); n++;
    XtSetArg(args[n], XmNdialogStyle, XmDIALOG_SYSTEM_MODAL); n++;
    info = XmCreateFormDialog(*(Widget *) client_data, NULL, args, n);
-   inf_lbl = XmStringCreateLocalized("\nThis program was written by\n\nBrian Masney\nmasneyb@newwave.net\n\nPlease feel free to email me any comments,\nsuggestions, or bugs about this program.\n");
+   inf_lbl = XmStringCreateLocalized((char*)"\nThis program was written by\n\nBrian Masney\nmasneyb@newwave.net\n\nPlease feel free to email me any comments,\nsuggestions, or bugs about this program.\n");
    label = XtVaCreateManagedWidget(NULL, xmLabelWidgetClass, info,
       XmNtopAttachment, XmATTACH_FORM,
       XmNtopOffset, 10, 
@@ -266,7 +267,7 @@ void aboutCB(Widget parent, XtPointer client_data, XtPointer call_data) {
       XmNrightOffset, 10, 
       XmNlabelString, inf_lbl,
       NULL);
-   push_lbl = XmStringCreateLocalized("OK");
+   push_lbl = XmStringCreateLocalized((char*)"OK");
    XtVaCreateManagedWidget(NULL, xmPushButtonWidgetClass, info,  
       XmNlabelString, push_lbl,
       XmNtopAttachment, XmATTACH_WIDGET,
@@ -364,7 +365,7 @@ void buttonCB(Widget parent, XtPointer client_data, XtPointer call_data) {
    XmToggleButtonCallbackStruct * ptr;
    
    ptr = (XmToggleButtonCallbackStruct *) call_data;
-   switch((int) client_data) {
+   switch((uintptr_t) client_data) {
       case 1 : istimer = ptr->set; break;
       case 2 : isscore = ptr->set; break;
       case 3 : iscountcrd = ptr->set; break;
@@ -540,7 +541,7 @@ void mousepress(Widget widget, XtPointer client_data, XButtonEvent *event, Boole
    window = XtWindow(drawa);
    frompile = -1;
    if(PILE_COL <= event->x && PILE_COL+CARD_WIDTH >= event->x && DECK_ROW <= event->y && DECK_ROW+CARD_HEIGHT >= event->y && !(piles[7] == NULL && piles[8] == NULL)) {
-      temp_undo = malloc(sizeof(struct undo_stk));
+      temp_undo = (struct undo_stk*)malloc(sizeof(struct undo_stk));
       if(temp_undo == NULL) {
          printf("Failed to alloc memory\n");
          exitCB(NULL, NULL, NULL);
@@ -656,7 +657,7 @@ void mousepress(Widget widget, XtPointer client_data, XButtonEvent *event, Boole
                   break;
                }
                else if(!strcmp(piles[i]->type, temp->type)) {
-                  temp_undo = malloc(sizeof(struct undo_stk));
+                  temp_undo = (struct undo_stk*)malloc(sizeof(struct undo_stk));
                   if(temp_undo == NULL) {
                      printf("Failed to alloc memory\n");
                      exitCB(NULL, NULL, NULL);
@@ -725,7 +726,7 @@ void mouserel(Widget widget, XtPointer client_data, XButtonEvent *event, Boolean
       XCopyArea(display, under, window, gc, 0, 0, CARD_WIDTH, ydraglen, xcoord, ycoord);
       if((frompile == 8 ? 8 : topile) == frompile && event->time < (dclk_time + MOUSE_DCLK) && event->time > (dclk_time - MOUSE_DCLK)) {
          for(i=9; i<13; i++) {
-            if(IsValidMove(frompile, moved_card->type, i, piles[i] == NULL ? "ZZ" : piles[i]->type)) {
+            if(IsValidMove(frompile, moved_card->type, i, piles[i] == NULL ? (char*)"ZZ" : piles[i]->type)) {
                dclk_time = -1;
                topile = i;
                break;
@@ -734,8 +735,8 @@ void mouserel(Widget widget, XtPointer client_data, XButtonEvent *event, Boolean
       }
       else dclk_time = event->time;
    }  
-   if(topile > 7 && dragged && frompile != -1 && strcmp(moved_card->type, piles[frompile]->type) == 0 && IsValidMove(frompile, moved_card->type, topile, piles[topile] == NULL ? "ZZ" : piles[topile]->type)) {
-      temp_undo = malloc(sizeof(struct undo_stk));
+   if(topile > 7 && dragged && frompile != -1 && strcmp(moved_card->type, piles[frompile]->type) == 0 && IsValidMove(frompile, moved_card->type, topile, piles[topile] == NULL ? (char*)"ZZ" : piles[topile]->type)) {
+      temp_undo = (struct undo_stk*)malloc(sizeof(struct undo_stk));
       if(temp_undo == NULL) {
          printf("Failed to alloc memory\n");
          exitCB(NULL, NULL, NULL);
@@ -764,9 +765,9 @@ void mouserel(Widget widget, XtPointer client_data, XButtonEvent *event, Boolean
       if(piles[topile] != NULL) piles[topile]->prev = moved_card;
       piles[topile] = moved_card;
    }
-   if(topile != -1 && frompile != -1 && topile < 7 && frompile != topile && dragged && IsValidMove(frompile, moved_card->type, topile, piles[topile] == NULL ? "ZZ" : piles[topile]->type)) {
+   if(topile != -1 && frompile != -1 && topile < 7 && frompile != topile && dragged && IsValidMove(frompile, moved_card->type, topile, piles[topile] == NULL ? (char*)"ZZ" : piles[topile]->type)) {
       temp = moved_card;
-      temp_undo = malloc(sizeof(struct undo_stk));
+      temp_undo = (struct undo_stk*)malloc(sizeof(struct undo_stk));
       if(temp_undo == NULL) {
          printf("Failed to alloc memory\n");
          exitCB(NULL, NULL, NULL);
@@ -932,7 +933,7 @@ void init_cards(void) {
       strcpy(cards[newpos],test);
    }
    for(i=0; i<52; i++) {
-      if(!(temp = malloc(sizeof(struct stck)))) {
+      if(!(temp = (struct stck*)malloc(sizeof(struct stck)))) {
          printf("Failed to alloc memory\n");
          exitCB(NULL, NULL, NULL);
       }

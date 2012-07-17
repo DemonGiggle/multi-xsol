@@ -12,7 +12,7 @@ MOREARGS=-Wall
 # Static Link version for Linux Systems with Redhat Motif 2.1
 LIBS=-lXm -lXt -lX11 -lXext -lXp -lSM -lICE -ldl -lxcb -lXau -lXdmcp -lpthread
 LIBPATH=/usr/X11R6/lib
-MOREARGS=-static
+MOREARGS=-static -std=c++0x 
 
 
 # For Linux Systems with Lesstif (or other versions of Motif)
@@ -31,5 +31,5 @@ MOREARGS=-static
 # MOREARGS=-I/usr/openwin/include -I/usr/dt/include
 
 
-xsol: xsol.c xsol.h
-	$(CC) -o xsol xsol.c $(MOREARGS) -L$(LIBPATH) $(LIBS)
+xsol: xsol.cpp xsol.h
+	$(CC) -o xsol xsol.cpp $(MOREARGS) -L$(LIBPATH) $(LIBS)
