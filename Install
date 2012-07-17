@@ -1,0 +1,14 @@
++=================================================
+|
+|	STEP
+|
++=================================================
+
+1. To produce native library -- libxsol.so
+make 
+
+2. And enter multi-xsol 
+tsc b r
+
+3. And run
+tsc r xsol_main -c
