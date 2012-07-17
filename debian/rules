@@ -1,0 +1,11 @@
+#!/usr/bin/make -f
+
+%:
+	dh $@ 
+
+override_dh_auto_build:
+	$(CC) $(CFLAGS) -o xsol xsol.c -I/usr/X11R6/include -L/usr/X11R6/lib -lXm -lXt -lX11
+
+override_dh_auto_clean:
+	dh_auto_clean
+	$(RM) xsol

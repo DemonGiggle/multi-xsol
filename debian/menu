@@ -1,0 +1,2 @@
+?package(xsol):needs="X11" section="Games/Card" \
+  title="X Solitaire" command="/usr/games/xsol"

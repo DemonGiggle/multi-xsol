@@ -1,0 +1,69 @@
+xsol (0.31-6) unstable; urgency=low
+
+  * QA upload.
+  * Changed control file
+     - Changed short description (Closes: #493447).
+     - Changed long description
+     - Changed mantainer to Debian QA Group.
+     - Added Homepage.
+  * Changed copyright file.
+  * Added dirs file.
+  * Changed rules file to use dh command (Closes: #438348).
+  * Added xsol.manpages.
+  * Added install file.
+  * Changed menu file syntax.
+
+ -- Mònica Ramírez Arceda <monica@probeta.net>  Tue, 12 Oct 2010 19:45:12 +0200
+
+xsol (0.31-5) unstable; urgency=low
+
+  * Upped lesstif build-dependency to v2, closes: #347048.
+
+ -- Josip Rodin <joy-packages@debian.org>  Sun, 18 Jun 2006 13:09:02 +0200
+
+xsol (0.31-4.1) unstable; urgency=high
+
+  * Non-maintainer upload.
+  * Removed xlibs-dev build-dep (Closes: #347048).
+
+ -- Luk Claes <luk@debian.org>  Fri, 20 Jan 2006 18:30:49 +0100
+
+xsol (0.31-4) unstable; urgency=low
+
+  * Ackgnowledging the NMU (thanks JHM!).
+  * Random packaging updates.
+  * Added build dependencies, closes: #101634.
+  * No longer depends on xlib6g, closes: #170208.
+
+ -- Josip Rodin <joy-packages@debian.org>  Thu, 23 Jan 2003 15:36:48 +0100
+
+xsol (0.31-3.1) unstable; urgency=low
+
+  * NMU to fix LessTif dependency. (Closes: #48182). 
+  * Added -lICE -lSM to link line.
+
+ -- J.H.M. Dassen (Ray) <jdassen@debian.org>  Sat, 30 Oct 1999 12:26:06 +0200
+
+xsol (0.31-3) unstable; urgency=low
+
+  * Updated for Policy 3.x. Moved binary to /usr/games, and manpage to
+    /usr/share/man/man6, to comply with Policy section 5.10.
+
+ -- Josip Rodin <jrodin@jagor.srce.hr>  Sun, 19 Sep 1999 19:59:45 +0200
+
+xsol (0.31-2) unstable; urgency=low
+
+  * Fixed a few errors in menu file and the manpage.
+  * Leave Makefile untouched, instead do everything from debian/rules.
+
+ -- Josip Rodin <jrodin@jagor.srce.hr>  Thu, 11 Mar 1999 20:02:17 +0100
+
+xsol (0.31-1) unstable; urgency=low
+
+  * Initial Release.
+
+ -- Josip Rodin <jrodin@jagor.srce.hr>  Sun,  8 Nov 1998 18:00:00 +0100
+
+Local variables:
+mode: debian-changelog
+End:

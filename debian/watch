@@ -1,0 +1,4 @@
+# Compulsory line, this is a version 3 file
+version=3
+
+ftp://sunsite.unc.edu/pub/Linux/X11/games/xsol-(.*).source.tgz debian uupdate

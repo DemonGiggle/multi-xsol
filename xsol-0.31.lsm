@@ -1,0 +1,16 @@
+Begin3
+Title:		X Solitare
+Version:	0.31
+Entered-date:	12OCT98
+Description:	A solitare program for X Windows written using Motif 1.2.
+		This program will compile and run with the latest version 
+		of Lesstif
+Keywords:	solitare X11 card game
+Author: 	masneyb@newwave.net (Brian Masney)
+Maintained-by:	masneyb@newwave.net (Brian Masney)
+Primary-site:	sunsite.unc.edu/pub/Linux/X11/games
+Alternate-site: 
+Original-site:	sunsite.unc.edu/pub/Linux/X11/games
+Platforms:	Motif 1.2 or Lesstif, X Windows
+Copying-policy:	GPL
+End

@@ -1,0 +1,16 @@
+Source: xsol
+Section: games
+Priority: optional
+Maintainer: Debian QA Group <packages@qa.debian.org>
+Build-Depends: debhelper (>= 7.0.50~), lesstif2-dev
+Standards-Version: 3.9.1
+Homepage: ftp://sunsite.unc.edu/pub/Linux/X11/games/
+
+Package: xsol
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: A solitaire game for the X Windows system
+ This is a simple Motif/Lesstif version of the classic solitaire game: 
+ Klondike Solitaire. 
+ .
+ This version of the game runs under X Window System.
