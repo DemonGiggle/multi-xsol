@@ -411,7 +411,6 @@ void undoCB(Widget widget, XtPointer client_data, XtPointer call_data) {
    }                  
    temp = piles[temp_undo->topile];
    for(i=0; i<undo->numcards-1; i++) temp = temp->next;
-   if(piles[temp_undo->topile] != NULL) piles[temp_undo->topile]->prev = NULL;
    if(piles[temp_undo->frompile] != NULL) piles[temp_undo->frompile]->prev = temp;
    piles[temp_undo->topile] = temp->next;
    for(i=0; i<undo->numcards; i++) {
@@ -427,6 +426,7 @@ void undoCB(Widget widget, XtPointer client_data, XtPointer call_data) {
       if(temp_undo->frompile == 7) numcards++;
       else if(temp_undo->topile == 7) numcards--;
    }
+   if(piles[temp_undo->topile] != NULL) piles[temp_undo->topile]->prev = NULL;
    if(temp_undo->score != 0) UpScore(temp_undo->score * -1);
    undo = undo->next;
    free(temp_undo);
