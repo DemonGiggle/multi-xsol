@@ -191,19 +191,20 @@ int xsol_main()
 
    n = 0;
    XtSetArg(args[n], XmNalignment, XmALIGNMENT_END); n++;
-   score_widget = XmCreateLabel(mainwindow, (char*)"", args, n);
+   score_widget = XmCreateLabel(mainwindow, (char*)"score_widget", args, n);
    XtAppAddTimeOut(app_context, 1000, (XtTimerCallbackProc) timerCB, (XtPointer) app_context);
    XtManageChild(mainwindow);
    XtRealizeWidget(parent);
 
    display = XtDisplay(drawa);
    gc = XCreateGC(display , XtWindow(drawa), 0, (XGCValues *) NULL);
-   init_cards();
 
    XmMainWindowSetAreas(mainwindow, menubar, (Widget) NULL, (Widget) NULL, 
        (Widget) NULL, drawa);
    XtVaSetValues(mainwindow, XmNmessageWindow, score_widget, NULL);
    XtManageChild(score_widget);
+   init_cards();
+   
    XtAppMainLoop(app_context);
    return 0;
 }
